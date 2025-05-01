@@ -1,0 +1,84 @@
+# This project utilizes the following Bookstore data:
+
+CREATE TABLE bookstore (
+  book_id INTEGER PRIMARY KEY,
+  title TEXT,
+  genre TEXT,
+  price DECIMAL(10, 2),
+  stock_quantity INTEGER,
+  average_rating DECIMAL(3, 2)
+);
+
+INSERT INTO bookstore (book_id, title, genre, price, stock_quantity, average_rating)
+VALUES
+(1, 'The Silent Patient', 'Thriller', 14.99, 45, 4.5),
+(2, 'Educated', 'Memoir', 16.95, 38, 4.7),
+(3, 'The Hobbit', 'Fantasy', 12.50, 50, 4.8),
+(4, '1984', 'Dystopian', 9.99, 60, 4.6),
+(5, 'Where the Crawdads Sing', 'Fiction', 17.99, 25, 4.4),
+(6, 'Sapiens', 'History', 18.50, 30, 4.7),
+(7, 'Becoming', 'Biography', 19.99, 28, 4.8),
+(8, 'The Alchemist', 'Fiction', 11.25, 40, 4.6),
+(9, 'Atomic Habits', 'Self-Help', 20.00, 70, 4.9),
+(10, 'Dune', 'Science Fiction', 15.95, 35, 4.5),
+(11, 'The Midnight Library', 'Fiction', 13.45, 42, 4.3),
+(12, 'It Ends With Us', 'Romance', 14.25, 55, 4.4),
+(13, 'The Subtle Art of Not Giving a F*ck', 'Self-Help', 19.95, 48, 4.2),
+(14, 'Pride and Prejudice', 'Classic', 7.99, 80, 4.5),
+(15, 'The Book Thief', 'Historical Fiction', 12.80, 50, 4.7),
+(16, 'To Kill a Mockingbird', 'Classic', 10.00, 60, 4.9),
+(17, 'The Great Gatsby', 'Classic', 9.50, 70, 4.4),
+(18, 'The Power of Now', 'Spirituality', 16.00, 25, 4.6),
+(19, 'Circe', 'Fantasy', 14.75, 40, 4.5),
+(20, 'A Man Called Ove', 'Fiction', 13.99, 33, 4.7),
+(21, 'Verity', 'Thriller', 15.50, 45, 4.3),
+(22, 'The Seven Husbands of Evelyn Hugo', 'Fiction', 14.60, 52, 4.6),
+(23, 'The Four Agreements', 'Self-Help', 8.95, 75, 4.5),
+(24, 'Project Hail Mary', 'Science Fiction', 18.99, 20, 4.9),
+(25, 'The Body Keeps the Score', 'Psychology', 19.99, 27, 4.8),
+(26, 'Can’t Hurt Me', 'Motivational', 21.00, 33, 4.7),
+(27, 'The House in the Cerulean Sea', 'Fantasy', 13.85, 45, 4.8),
+(28, 'Little Fires Everywhere', 'Fiction', 12.99, 40, 4.3),
+(29, 'Normal People', 'Romance', 11.75, 48, 4.2),
+(30, 'The Giver', 'Dystopian', 10.25, 50, 4.6),
+(31, 'The Girl on the Train', 'Thriller', 9.99, 55, 4.1),
+(32, 'Eleanor Oliphant Is Completely Fine', 'Fiction', 13.95, 60, 4.5),
+(33, 'The Handmaid’s Tale', 'Dystopian', 12.50, 38, 4.4),
+(34, 'Outliers', 'Nonfiction', 17.95, 43, 4.6),
+(35, 'Greenlights', 'Memoir', 19.50, 35, 4.7),
+(36, 'The Paris Library', 'Historical Fiction', 14.99, 29, 4.3),
+(37, 'Big Magic', 'Creativity', 13.60, 32, 4.2),
+(38, 'The 5 Love Languages', 'Self-Help', 12.30, 58, 4.5),
+(39, 'Beach Read', 'Romance', 11.50, 64, 4.4),
+(40, 'The Invisible Life of Addie LaRue', 'Fantasy', 16.50, 36, 4.6),
+(41, 'Before We Were Strangers', 'Romance', 9.99, 55, 4.3),
+(42, 'Norwegian Wood', 'Literary Fiction', 12.00, 30, 4.4),
+(43, 'The Stranger', 'Classic', 10.25, 42, 4.3),
+(44, 'Man’s Search for Meaning', 'Philosophy', 9.75, 38, 4.8),
+(45, 'The Mountain Is You', 'Self-Help', 14.00, 50, 4.6),
+(46, 'We Were Liars', 'Young Adult', 13.25, 41, 4.1),
+(47, 'Red, White & Royal Blue', 'Romance', 15.00, 35, 4.5),
+(48, 'The Love Hypothesis', 'Romance', 13.95, 47, 4.6),
+(49, 'Think Again', 'Psychology', 18.00, 34, 4.7),
+(50, 'The Night Circus', 'Fantasy', 14.99, 39, 4.7);
+
+#Select all books and order them by price from lowest to highest
+SELECT *
+FROM bookstore
+ORDER BY price;
+
+#Calculate the average price of all books in the bookstore
+SELECT AVG(price) AS average_price
+FROM bookstore;
+
+#Find the highest priced book in the "Fantasy" genre
+#Note: genre is case-sensitive, so 'Fantasy' must match exactly
+SELECT MAX(price) AS max_fantasy_price
+FROM bookstore
+WHERE genre = 'Fantasy';
+
+#Count how many books have more than 50 copies in stock
+#This helps identify which books are well-stocked
+SELECT COUNT(*) AS high_stock_books
+FROM bookstore
+WHERE stock_quantity > 50;
