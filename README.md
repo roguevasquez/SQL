@@ -1,4 +1,4 @@
-# Rogue's SQL Portfolio: Bookstore, Fortune 500 & Climate Conference Analyses
+# Rogue's SQL Portfolio: Bookstore, Fortune 500, & Climate Conference Analyses
 
 Welcome to my SQL portfolio! This code repository showcases SQL queries I've written using three fictional but realistic datasets: a bookstore, a collection of Fortune 500 companies, and a climate research conference. Each project demonstrates my ability to extract insights through filtering, aggregation, joins, and categorization techniques.
 
