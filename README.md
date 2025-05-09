@@ -1,68 +1,53 @@
-# Rogue's SQL Portfolio: Bookstore, Fortune 500, & Climate Conference Analyses
+# Rogue's SQL Portfolio: Multi-Dataset Analytics
 
-Welcome to my SQL portfolio! This code repository showcases SQL queries I've written using three fictional but realistic datasets: a bookstore, a collection of Fortune 500 companies, and a climate research conference. Each project demonstrates my ability to extract insights through filtering, aggregation, joins, and categorization techniques.
-
----
-
-## 📚 Bookstore Database Project
-
-This dataset simulates a small bookstore with:
-- 50 unique book entries  
-- Data on **title, genre, price, stock quantity**, and **average rating**
-
-**Skills Demonstrated:**
-- Filtering by price and genre  
-- Aggregating data (e.g., average and max prices)  
-- Answering practical business questions with SQL
-
-**Sample SQL Queries Included:**
-- 🧾 Ordered books by price  
-- 📊 Calculated statistics like average and max book prices  
-- 🔍 Queried genre-specific data (e.g., max price in *Fantasy*)  
-- ❓ Answered stock-related questions like “How many Romance books are in stock?”
+Welcome to my SQL portfolio! This repository showcases query projects built on realistic datasets, including a bookstore, Fortune 500 companies, a climate conference, and customer sales records. Each project demonstrates core SQL techniques like filtering, aggregation, joins, and subqueries to extract meaningful insights.
 
 ---
 
-## 💼 Fortune 500 Companies Project
+## 📚 Bookstore Database Project  
+Simulates a small bookstore with 50 book entries and tracks genre, pricing, stock, and ratings.
 
-This dataset contains attributes for major U.S. companies across various industries:
-- Fields include **revenue, employees, healthcare benefits, PTO**, and **average tenure**
-
-**Skills Demonstrated:**
-- Logical filtering using `WHERE` with `AND`, `OR`, and `IN`  
-- Revenue-per-employee calculations using aliases  
-- Categorizing employee tenure using `CASE` statements  
-- Industry-level revenue analysis with `GROUP BY` and `HAVING`  
-
-**Sample SQL Queries Included:**
-- 🏥 Found companies with healthcare and generous paid time off  
-- 💰 Calculated revenue per employee across all companies  
-- 🧠 Grouped companies by employee tenure category (e.g., High vs. Low Tenure)  
-- 🏭 Compared industry averages to uncover high-performing sectors
+**Highlights:**
+- Filtered and ranked books by genre and price  
+- Calculated average and max prices per category  
+- Queried inventory levels for business decisions
 
 ---
 
-## 🌎 Climate Conference Project
+## 💼 Fortune 500 Companies Project  
+Analyzes major U.S. companies by industry, benefits, and employee tenure.
 
-This dataset focuses on VIP attendees at a climate research conference, along with their event participation, hotel bookings, and RSVP statuses.
+**Highlights:**
+- Filtered companies by benefits and time off  
+- Calculated revenue per employee  
+- Used `CASE` and `HAVING` for performance segmentation
 
-**Skills Demonstrated:**
-- Joining data across multiple tables using `LEFT JOIN`, `INNER JOIN`, and `SELF JOIN`  
-- Filtering on BIT fields (e.g., RSVP responses)  
-- Using subqueries and multi-level logic to identify hotel booking trends
+---
 
-**Sample SQL Queries Included:**
-- 📋 Matched VIPs to their events and hotels  
-- 🔄 Tracked who each VIP is providing feedback to  
-- ✅ Analyzed RSVP patterns for welcome and dinner events  
-- 🏨 Identified the hotel with the highest number of reservations
+## 🌎 Climate Conference Project  
+Covers VIP attendees, event schedules, hotel reservations, and feedback loops for a climate conference.
+
+**Highlights:**
+- Connected attendees to events and hotels using joins  
+- Mapped peer feedback with a self-join  
+- Analyzed RSVP responses and hotel booking trends
+
+---
+
+## 🧾 Customer & Order Analytics Project  
+Tracks order activity across January and February using a sales database.
+
+**Highlights:**
+- Counted total and iPhone-specific orders  
+- Joined customer and sales data to track purchases  
+- Calculated product-level revenue and location-based sales
 
 ---
 
 ## 🛠️ Technologies Used
 
 - **SQL** (PostgreSQL-style syntax)
-- **Markdown** (for styling this README)
+- **Markdown** (for documentation)
 
 ---
 
