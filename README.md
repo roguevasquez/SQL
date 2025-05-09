@@ -1,6 +1,6 @@
-# Rogue's SQL Portfolio: Bookstore & Fortune 500 Analyses
+# Rogue's SQL Portfolio: Bookstore, Fortune 500 & Climate Conference Analyses
 
-Welcome to my SQL portfolio! This code repository showcases SQL queries I've written using two fictional but realistic datasets: a bookstore and a collection of Fortune 500 companies. Each project demonstrates my ability to extract insights through filtering, aggregation, and categorization techniques.
+Welcome to my SQL portfolio! This code repository showcases SQL queries I've written using three fictional but realistic datasets: a bookstore, a collection of Fortune 500 companies, and a climate research conference. Each project demonstrates my ability to extract insights through filtering, aggregation, joins, and categorization techniques.
 
 ---
 
@@ -42,6 +42,23 @@ This dataset contains attributes for major U.S. companies across various industr
 
 ---
 
+## 🌎 Climate Conference Project
+
+This dataset focuses on VIP attendees at a climate research conference, along with their event participation, hotel bookings, and RSVP statuses.
+
+**Skills Demonstrated:**
+- Joining data across multiple tables using `LEFT JOIN`, `INNER JOIN`, and `SELF JOIN`  
+- Filtering on BIT fields (e.g., RSVP responses)  
+- Using subqueries and multi-level logic to identify hotel booking trends
+
+**Sample SQL Queries Included:**
+- 📋 Matched VIPs to their events and hotels  
+- 🔄 Tracked who each VIP is providing feedback to  
+- ✅ Analyzed RSVP patterns for welcome and dinner events  
+- 🏨 Identified the hotel with the highest number of reservations
+
+---
+
 ## 🛠️ Technologies Used
 
 - **SQL** (PostgreSQL-style syntax)
@@ -50,4 +67,3 @@ This dataset contains attributes for major U.S. companies across various industr
 ---
 
 Feel free to explore the code and reach out if you have any questions!
-
