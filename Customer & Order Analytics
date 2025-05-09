@@ -3,6 +3,12 @@
 # This query set analyzes sales and customer activity across several months using a commerce relational database. 
 # It explores order volumes, product-specific trends, revenue insights, and customer behaviors through filtering, joins, and aggregations.
 
+-- Customer & Order Analytics Project
+-- ----------------------------------
+-- This query set analyzes sales and customer activity across January and February 
+-- using a commerce relational database. It explores order volumes, product-specific trends, 
+-- revenue insights, and customer behaviors through filtering, joins, and aggregations.
+
 # 1. How many many unique orders were placed in January?
 SELECT COUNT(distinct orderid)
 FROM BIT_DB.JanSales
