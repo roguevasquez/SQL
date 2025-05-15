@@ -1,0 +1,156 @@
+Spotify Data Analytics Project
+
+# For this project, I downloaded Spotify data from Kaggle containing musical features such as danceability, energy, loudness, and popularity for each song.
+# Then I created a table to insert Spotify data into.
+# Finally, I performed analytics on the data using SQL to analyze patterns in song characteristics, artist trends, and correlations between audio features and popularity.
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL. 
+# 1. Which top 10 songs have the highest popularity?
+
+SELECT track_name, artist_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+# 2. What are the top 5 most energetic tracks?
+
+SELECT track_name, artist_name, energy
+FROM BIT_DB.Spotifydata
+ORDER BY energy DESC
+LIMIT 5;
+
+# 3. What is the average tempo of all songs?
+
+SELECT AVG(tempo) AS avg_tempo
+FROM BIT_DB.Spotifydata;
+
+# 4. How many songs are in major mode (song_mode = 1) vs minor mode (song_mode = 0)?
+
+SELECT song_mode, COUNT(*) AS count
+FROM BIT_DB.Spotifydata
+GROUP BY song_mode;
+
+# 5. What are the distinct time signatures in the dataset?
+
+SELECT DISTINCT time_signature
+FROM BIT_DB.Spotifydata;
+
+# 6. Which artist has the most tracks in this dataset?
+
+SELECT artist_name, COUNT(*) AS track_count
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY track_count DESC
+LIMIT 1;
+
+# 7. Find all songs with danceability greater than 0.8 and energy over 0.8.
+
+SELECT track_name, artist_name, danceability, energy
+FROM BIT_DB.Spotifydata
+WHERE danceability > 0.8 AND energy > 0.8;
+
+# 8.Which track has the highest loudness and what’s its popularity?
+
+SELECT track_name, artist_name, loudness, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY loudness DESC
+LIMIT 1;
+
+# 9. What is the average valence and energy grouped by song_key?
+
+SELECT song_key, AVG(valence) AS avg_valence, AVG(energy) AS avg_energy
+FROM BIT_DB.Spotifydata
+GROUP BY song_key;
+
+# 10. How many songs have both low speechiness (< 0.1) and high instrumentalness (> 0.9)?
+
+SELECT track_name, artist_name, speechiness, instrumentalness
+FROM BIT_DB.Spotifydata
+WHERE speechiness < 0.1 AND instrumentalness > 0.9;
+
+# 11. Which artist has the highest average popularity across their tracks?
+
+SELECT artist_name, AVG(popularity) AS avg_popularity
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY avg_popularity DESC
+LIMIT 1;
+
+# 12. What is the average duration (in seconds) of songs grouped by time_signature?
+
+SELECT time_signature, AVG(duration_ms)/1000 AS avg_duration_seconds
+FROM BIT_DB.Spotifydata
+GROUP BY time_signature;
+
+# 13. Which key (song_key) tends to have the highest average danceability?
+
+SELECT song_key, AVG(danceability) AS avg_danceability
+FROM Spotifydata
+GROUP BY song_key
+ORDER BY avg_danceability DESC
+LIMIT 1;
+
+# 14. Find the top 3 songs that are most “acoustic” but also have a high valence (> 0.7).
+
+SELECT track_name, artist_name, acousticness, valence
+FROM Spotifydata
+WHERE valence > 0.7
+ORDER BY acousticness DESC
+LIMIT 3;
+
+# 15. Count of Songs by Popularity Range.
+
+SELECT 
+  CASE 
+    WHEN popularity BETWEEN 0 AND 19 THEN '0-19'
+    WHEN popularity BETWEEN 20 AND 39 THEN '20-39'
+    WHEN popularity BETWEEN 40 AND 59 THEN '40-59'
+    WHEN popularity BETWEEN 60 AND 79 THEN '60-79'
+    WHEN popularity BETWEEN 80 AND 100 THEN '80-100'
+    ELSE 'Unknown'
+  END AS popularity_range,
+  COUNT(*) AS song_count
+FROM Spotifydata
+GROUP BY popularity_range
+ORDER BY popularity_range;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
