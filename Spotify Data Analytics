@@ -80,11 +80,20 @@ FROM BIT_DB.Spotifydata
 ORDER BY loudness DESC
 LIMIT 1;
 
-# 9. What is the average valence and energy grouped by song_key?
+# 9. Calculate the average popularity for the artists in the Spotify data table. 
+#   Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, and label them as a “Top Star”.
 
-SELECT song_key, AVG(valence) AS avg_valence, AVG(energy) AS avg_energy
-FROM BIT_DB.Spotifydata
-GROUP BY song_key;
+WITH popularity_average_CTE AS (
+SELECT s.artist_name,
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData s 
+GROUP BY s.artist_name
+)
+SELECT  artist_name,
+        average_popularity,
+        'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity>=90;
 
 # 10. How many songs have both low speechiness (< 0.1) and high instrumentalness (> 0.9)?
 
