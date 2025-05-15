@@ -1,6 +1,6 @@
 # Rogue's SQL Portfolio: Multi-Dataset Analytics
 
-Welcome to my SQL portfolio! This repository features query projects across diverse, realistic datasets—including a bookstore, Fortune 500 companies, a climate conference, customer sales records, and Spotify tracks. Each project showcases core SQL skills like filtering, aggregation, joins, and subqueries to uncover insights.
+Welcome to my SQL portfolio! This repository features query projects across diverse, realistic datasets—including a bookstore, Fortune 500 companies, a climate conference, customer sales records, Spotify tracks, and a digital music store (Chinook). Each project showcases core SQL skills like filtering, aggregation, joins, and subqueries to uncover insights.
 
 ---
 
@@ -51,6 +51,16 @@ Explores audio features of songs using a Spotify dataset.
 - Ranked songs by energy, loudness, and popularity  
 - Grouped by musical mode and time signature  
 - Analyzed trends in danceability, acousticness, and instrumentalness
+
+---
+
+## 🎶 Chinook Music Store Analysis  
+Explores customer behavior, revenue trends, and artist insights from a fictional digital music store.
+
+**Key Skills:**  
+- Analyzed customer spending by country and employee  
+- Identified top-grossing artists, albums, and genres  
+- Compared USA vs international sales and employee performance
 
 ---
 
