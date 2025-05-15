@@ -1,54 +1,64 @@
 # Rogue's SQL Portfolio: Multi-Dataset Analytics
 
-Welcome to my SQL portfolio! This repository showcases query projects built on realistic datasets, including a bookstore, Fortune 500 companies, a climate conference, and customer sales records. Each project demonstrates core SQL techniques like filtering, aggregation, joins, and subqueries to extract meaningful insights.
+Welcome to my SQL portfolio! This repository features query projects across diverse, realistic datasets—including a bookstore, Fortune 500 companies, a climate conference, customer sales records, and Spotify tracks. Each project showcases core SQL skills like filtering, aggregation, joins, and subqueries to uncover insights.
 
 ---
 
-## 📚 Bookstore Database Project  
-Simulates a small bookstore with 50 book entries and tracks genre, pricing, stock, and ratings.
+## 📚 Bookstore Project  
+A small bookstore with 50 titles tracking genres, prices, stock, and ratings.
 
-**Highlights:**
-- Filtered and ranked books by genre and price  
-- Calculated average and max prices per category  
-- Queried inventory levels for business decisions
-
----
-
-## 💼 Fortune 500 Companies Project  
-Analyzes major U.S. companies by industry, benefits, and employee tenure.
-
-**Highlights:**
-- Filtered companies by benefits and time off  
-- Calculated revenue per employee  
-- Used `CASE` and `HAVING` for performance segmentation
+**Key Skills:**  
+- Ranked books by price and genre  
+- Calculated average/max prices  
+- Queried inventory for business insights
 
 ---
 
-## 🌎 Climate Conference Project  
-Covers VIP attendees, event schedules, hotel reservations, and feedback loops for a climate conference.
+## 💼 Fortune 500 Analysis  
+Examines U.S. companies by benefits, industry, and employee metrics.
 
-**Highlights:**
-- Connected attendees to events and hotels using joins  
-- Mapped peer feedback with a self-join  
-- Analyzed RSVP responses and hotel booking trends
+**Key Skills:**  
+- Filtered by benefits and PTO  
+- Revenue per employee calculations  
+- Used `CASE` and `HAVING` for segmentation
 
 ---
 
-## 🧾 Customer & Order Analytics Project  
-Tracks order activity across January and February using a sales database.
+## 🌎 Climate Conference Insights  
+Analyzes VIP attendees, schedules, hotels, and feedback at a fictional conference.
 
-**Highlights:**
+**Key Skills:**  
+- Joined attendee, event, and hotel data  
+- Self-joined feedback data  
+- Analyzed RSVP and booking trends
+
+---
+
+## 🧾 Customer Order Analytics  
+Tracks January and February orders in a regional sales database.
+
+**Key Skills:**  
 - Counted total and iPhone-specific orders  
-- Joined customer and sales data to track purchases  
-- Calculated product-level revenue and location-based sales
+- Joined customer and order data  
+- Calculated revenue by product and location
+
+---
+
+## 🎵 Spotify Track Analysis  
+Explores audio features of songs using a Spotify dataset.
+
+**Key Skills:**  
+- Ranked songs by energy, loudness, and popularity  
+- Grouped by musical mode and time signature  
+- Analyzed trends in danceability, acousticness, and instrumentalness
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **SQL** (PostgreSQL-style syntax)
+- **SQL** (SQLite & PostgreSQL-style syntax)
 - **Markdown** (for documentation)
 
 ---
 
-Feel free to explore the code and reach out if you have any questions!
+Feel free to explore the code and reach out with any questions!
