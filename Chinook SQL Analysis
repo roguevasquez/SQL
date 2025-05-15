@@ -1,0 +1,128 @@
+# Chinook SQL Analysis Project
+
+# This project analyzes the Chinook database, a digital music store with customer, employee, invoice, track, and artist data. 
+# Through SQL queries, it uncovers customer trends, revenue insights, artist activity, and employee impact across global sales.
+
+# Which countries have the most customers, and how many are there per country?
+
+SELECT Country, COUNT(*) AS customer_count
+FROM customers
+GROUP BY Country
+ORDER BY customer_count DESC;
+
+# What are the most popular track genres based on how many tracks exist in each genre?
+
+SELECT g.Name AS genre_name, COUNT(t.TrackId) AS track_count
+FROM genres g
+JOIN tracks t ON g.GenreId = t.GenreId
+GROUP BY g.Name
+ORDER BY track_count DESC;
+
+# Who are the customers from Brazil, and which employees are assigned to support them?
+
+SELECT 
+  c.FirstName || ' ' || c.LastName AS customer_name,
+  e.FirstName || ' ' || e.LastName AS support_rep
+FROM customers c
+JOIN employees e ON c.SupportRepId = e.EmployeeId
+WHERE c.Country = 'Brazil';
+
+# Which artist has released the most individual tracks in the store?
+
+SELECT a.Name AS artist_name, COUNT(t.TrackId) AS total_tracks
+FROM artists a
+JOIN albums al ON a.ArtistId = al.ArtistId
+JOIN tracks t ON al.AlbumId = t.AlbumId
+GROUP BY a.Name
+ORDER BY total_tracks DESC
+LIMIT 1;
+
+# What are the top 5 longest tracks available, and what albums are they from?
+
+SELECT t.Name AS track_name, al.Title AS album_title, t.Milliseconds / 1000 AS length_sec
+FROM tracks t
+JOIN albums al ON t.AlbumId = al.AlbumId
+ORDER BY t.Milliseconds DESC
+LIMIT 5;
+
+# Which albums generated the most revenue based on invoice data?
+
+SELECT al.Title AS album_title, a.Name AS artist_name, ROUND(SUM(ii.UnitPrice * ii.Quantity), 2) AS total_revenue
+FROM invoice_items ii
+JOIN tracks t ON ii.TrackId = t.TrackId
+JOIN albums al ON t.AlbumId = al.AlbumId
+JOIN artists a ON al.ArtistId = a.ArtistId
+GROUP BY al.Title, a.Name
+ORDER BY total_revenue DESC
+LIMIT 5;
+
+# Who are the top 3 customers by total spending, and which country are they from?
+
+SELECT 
+  c.FirstName || ' ' || c.LastName AS customer_name,
+  c.Country,
+  ROUND(SUM(i.Total), 2) AS total_spent
+FROM customers c
+JOIN invoices i ON c.CustomerId = i.CustomerId
+GROUP BY c.CustomerId
+ORDER BY total_spent DESC
+LIMIT 3;
+
+# What’s the average track length and price per genre—and which genre is the most expensive per minute?
+
+SELECT 
+  g.Name AS genre,
+  ROUND(AVG(t.Milliseconds) / 60000, 2) AS avg_length_min,
+  ROUND(AVG(t.UnitPrice), 2) AS avg_price,
+  ROUND(AVG(t.UnitPrice) / (AVG(t.Milliseconds) / 60000), 2) AS price_per_minute
+FROM tracks t
+JOIN genres g ON t.GenreId = g.GenreId
+GROUP BY g.Name
+ORDER BY price_per_minute DESC;
+
+# How much revenue has each support employee helped bring in through their assigned customers?
+
+SELECT 
+  e.FirstName || ' ' || e.LastName AS employee_name,
+  ROUND(SUM(i.Total), 2) AS total_revenue
+FROM employees e
+JOIN customers c ON e.EmployeeId = c.SupportRepId
+JOIN invoices i ON c.CustomerId = i.CustomerId
+GROUP BY e.EmployeeId
+ORDER BY total_revenue DESC;
+
+# Are customers in the USA spending more on average than customers in other countries?
+
+SELECT 
+  CASE WHEN Country = 'USA' THEN 'USA' ELSE 'Other' END AS region,
+  ROUND(AVG(Total), 2) AS avg_spending
+FROM customers c
+JOIN invoices i ON c.CustomerId = i.CustomerId
+GROUP BY region;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
