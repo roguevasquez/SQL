@@ -1,0 +1,117 @@
+-- HR Attrition Analysis – SQL Project
+
+-- Dataset Source:
+-- IBM HR Analytics Employee Attrition & Performance
+-- Kaggle Link: https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
+-- This dataset contains detailed employee-level data including attrition status, job satisfaction,
+-- tenure, income, and other demographic and workplace factors.
+
+-- Project Description:
+-- This project uses SQL to analyze trends in employee attrition.
+-- Insights include attrition rates by department, job satisfaction comparisons,
+-- overtime impact, tenure insights, and demographic breakdowns.
+-- The script is divided into logical sections and designed to support further dashboard visualization.
+
+--  Section 1: Basic Data Exploration
+
+-- 1.1 View sample data
+SELECT * 
+FROM employee_data
+LIMIT 10;
+
+-- 1.2 Total number of employees
+SELECT COUNT(*) AS total_employees
+FROM employee_data;
+
+-- 1.3 Employees who left vs stayed
+SELECT 
+  Attrition,
+  COUNT(*) AS employee_count
+FROM employee_data
+GROUP BY Attrition;
+
+-- Section 2: Attrition by Department and Job Role
+
+-- 2.1 Attrition rate by Department
+SELECT 
+  Department,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS num_attrited,
+  COUNT(*) AS total_employees,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_percent
+FROM employee_data
+GROUP BY Department;
+
+-- 2.2 Attrition rate by JobRole
+SELECT 
+  JobRole,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS num_attrited,
+  COUNT(*) AS total_employees,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_percent
+FROM employee_data
+GROUP BY JobRole
+ORDER BY attrition_rate_percent DESC;
+
+--  Section 3: Satisfaction vs Attrition
+
+-- 3.1 Average satisfaction scores by Attrition status
+SELECT 
+  Attrition,
+  ROUND(AVG(JobSatisfaction), 2) AS avg_job_satisfaction,
+  ROUND(AVG(EnvironmentSatisfaction), 2) AS avg_environment_satisfaction,
+  ROUND(AVG(RelationshipSatisfaction), 2) AS avg_relationship_satisfaction,
+  ROUND(AVG(WorkLifeBalance), 2) AS avg_work_life_balance
+FROM employee_data
+GROUP BY Attrition;
+
+--  Section 4: Tenure, Age, and Income Analysis
+
+-- 4.1 Years at company and MonthlyIncome by Attrition
+SELECT 
+  Attrition,
+  ROUND(AVG(YearsAtCompany), 2) AS avg_years_at_company,
+  ROUND(AVG(MonthlyIncome), 2) AS avg_monthly_income
+FROM employee_data
+GROUP BY Attrition;
+
+-- 4.2 Attrition by Age Bracket
+SELECT 
+  CASE 
+    WHEN Age < 30 THEN '<30'
+    WHEN Age BETWEEN 30 AND 39 THEN '30-39'
+    WHEN Age BETWEEN 40 AND 49 THEN '40-49'
+    ELSE '50+'
+  END AS age_bracket,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS num_attrited,
+  COUNT(*) AS total_in_group,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_percent
+FROM employee_data
+GROUP BY age_bracket;
+
+--  Section 5: Overtime, Gender, and Marital Status
+
+-- 5.1 Attrition by OverTime
+SELECT 
+  OverTime,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS num_attrited,
+  COUNT(*) AS total_employees,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_percent
+FROM employee_data
+GROUP BY OverTime;
+
+-- 5.2 Attrition by Gender
+SELECT 
+  Gender,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS num_attrited,
+  COUNT(*) AS total_employees,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_percent
+FROM employee_data
+GROUP BY Gender;
+
+-- 5.3 Attrition by MaritalStatus
+SELECT 
+  MaritalStatus,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS num_attrited,
+  COUNT(*) AS total_employees,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_percent
+FROM employee_data
+GROUP BY MaritalStatus;
