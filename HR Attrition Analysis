@@ -1,0 +1,9 @@
+-- ########################################################
+-- HR Attrition Analysis – SQL Project
+-- ########################################################
+
+-- Dataset Source:
+-- IBM HR Analytics Employee Attrition & Performance
+-- Kaggle Link: https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
+-- This dataset contains detailed employee-level data including attrition status, job satisfaction,
+-- tenure, income, and other demographic and workplace factors.
