@@ -1,0 +1,123 @@
+-- HR Metrics Tracker – SQL Project
+-- Author: Rogue Vasquez
+
+-- Dataset Description:
+-- This is a fictional employee dataset created for demonstration purposes.
+-- It simulates employee records to analyze common HR metrics such as:
+-- turnover, training completion, absenteeism, survey scores, and department headcounts.
+-- The project uses SQL (SQLite) to extract insights that support HR decision-making.
+
+-- Section 1: Create and Populate the Database
+
+CREATE TABLE employees (
+    employee_id TEXT PRIMARY KEY,
+    department TEXT,
+    hire_date DATE,
+    termination_date DATE,
+    absences INTEGER,
+    training_completed TEXT, -- 'Yes' or 'No'
+    survey_score INTEGER     -- 1 to 5 scale
+);
+
+-- Insert 30 sample employee records into the employees table
+
+INSERT INTO employees VALUES
+('E001', 'Sales', '2024-11-01', '2025-03-01', 2, 'Yes', 4),
+('E002', 'HR', '2024-10-10', NULL, 0, 'No', 5),
+('E003', 'IT', '2024-08-12', '2025-01-15', 4, 'Yes', 3),
+('E004', 'Sales', '2024-12-01', NULL, 1, 'Yes', 4),
+('E005', 'Marketing', '2024-09-15', '2025-02-10', 5, 'Yes', 2),
+('E006', 'HR', '2025-01-20', NULL, 0, 'Yes', 5),
+('E007', 'IT', '2024-07-05', NULL, 1, 'No', 4),
+('E008', 'Marketing', '2025-03-01', NULL, 0, 'Yes', 5),
+('E009', 'Sales', '2025-02-15', NULL, 1, 'Yes', 4),
+('E010', 'IT', '2024-12-05', '2025-06-01', 2, 'No', 3),
+('E011', 'HR', '2024-09-01', NULL, 0, 'Yes', 5),
+('E012', 'Marketing', '2024-10-20', '2025-04-15', 3, 'Yes', 4),
+('E013', 'Sales', '2024-08-18', '2025-05-10', 2, 'No', 3),
+('E014', 'IT', '2024-11-25', NULL, 0, 'Yes', 5),
+('E015', 'HR', '2025-01-05', NULL, 1, 'No', 4),
+('E016', 'Sales', '2024-07-14', NULL, 0, 'Yes', 5),
+('E017', 'Marketing', '2025-02-01', NULL, 0, 'Yes', 5),
+('E018', 'IT', '2024-06-30', '2025-03-30', 4, 'No', 2),
+('E019', 'HR', '2025-03-10', NULL, 1, 'Yes', 4),
+('E020', 'Sales', '2024-10-05', NULL, 2, 'Yes', 3),
+('E021', 'IT', '2024-08-21', NULL, 3, 'Yes', 5),
+('E022', 'Marketing', '2024-12-11', NULL, 0, 'Yes', 5),
+('E023', 'HR', '2024-07-30', '2025-04-01', 1, 'Yes', 3),
+('E024', 'Sales', '2025-01-22', NULL, 0, 'Yes', 5),
+('E025', 'IT', '2024-11-15', NULL, 0, 'Yes', 4),
+('E026', 'Marketing', '2024-08-25', '2025-05-20', 2, 'No', 2),
+('E027', 'HR', '2025-03-05', NULL, 0, 'Yes', 5),
+('E028', 'Sales', '2024-09-09', '2025-01-31', 3, 'No', 3),
+('E029', 'IT', '2024-10-28', NULL, 1, 'Yes', 4),
+('E030', 'Marketing', '2025-02-28', NULL, 0, 'Yes', 5);
+
+-- Section 2: HR Metrics Analysis
+
+-- 2.1 Total Employees
+SELECT COUNT(*) AS total_employees
+FROM employees;
+
+-- 2.2 Total Active Employees (no termination date)
+SELECT COUNT(*) AS active_employees
+FROM employees
+WHERE termination_date IS NULL;
+
+-- 2.3 Total Terminated Employees
+SELECT COUNT(*) AS terminated_employees
+FROM employees
+WHERE termination_date IS NOT NULL;
+
+-- 2.4 Turnover Rate
+SELECT 
+  ROUND(
+    CAST(SUM(CASE WHEN termination_date IS NOT NULL THEN 1 ELSE 0 END) AS FLOAT) 
+    / COUNT(*), 2
+  ) AS turnover_rate
+FROM employees;
+
+-- 2.5 Training Completion Rate
+SELECT 
+  ROUND(
+    CAST(SUM(CASE WHEN training_completed = 'Yes' THEN 1 ELSE 0 END) AS FLOAT) 
+    / COUNT(*), 2
+  ) AS training_completion_rate
+FROM employees;
+
+-- 2.6 Average Survey Score
+SELECT 
+  ROUND(AVG(survey_score), 2) AS avg_survey_score
+FROM employees
+WHERE survey_score IS NOT NULL;
+
+-- 2.7 Average Absenteeism per Employee
+SELECT 
+  ROUND(AVG(absences), 2) AS avg_absences
+FROM employees;
+
+-- 2.8 Headcount by Department
+SELECT 
+  department,
+  COUNT(*) AS total_employees,
+  SUM(CASE WHEN termination_date IS NULL THEN 1 ELSE 0 END) AS active_employees
+FROM employees
+GROUP BY department;
+
+-- 2.9 Training Completion by Department
+SELECT 
+  department,
+  COUNT(*) AS total_employees,
+  SUM(CASE WHEN training_completed = 'Yes' THEN 1 ELSE 0 END) AS completed_training,
+  ROUND(100.0 * SUM(CASE WHEN training_completed = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS completion_percent
+FROM employees
+GROUP BY department;
+
+-- 2.10 Terminations by Month
+SELECT 
+  strftime('%Y-%m', termination_date) AS termination_month,
+  COUNT(*) AS num_terminated
+FROM employees
+WHERE termination_date IS NOT NULL
+GROUP BY termination_month
+ORDER BY termination_month;
